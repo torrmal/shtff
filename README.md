@@ -7,7 +7,7 @@ A book for people who Googled "how to raise money" at 3 AM and ended up here ins
 
 This is a draft of my learnings of the pre-seed stage funding at [mindsdb](https://github.com/mindsdb/mindsdb)
 
-**[Download the book's PDF](book.pdf)**
+**[Download the book's PDF](https://github.com/torrmal/shtff/raw/main/book.pdf)**
 
 ---
 
