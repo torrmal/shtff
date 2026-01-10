@@ -1,4 +1,4 @@
-[![SH*T Book](https://docs.google.com/drawings/d/e/2PACX-1vSI9AltEo7HSdUwiYGTutjmh8Or_Tv9YDWBk9bdB3BwBZ_uYj5mdFQ53IlIyMTIqU2i4YgSbE4x9wn2/pub?w=960&h=720)](https://torrmal.github.io/shitff/)
+[![SH*T Book](https://docs.google.com/drawings/d/e/2PACX-1vSI9AltEo7HSdUwiYGTutjmh8Or_Tv9YDWBk9bdB3BwBZ_uYj5mdFQ53IlIyMTIqU2i4YgSbE4x9wn2/pub?w=960&h=720)](https://torrmal.github.io/shtff/)
 
 
 
@@ -7,7 +7,7 @@ A book for people who Googled "how to raise money" at 3 AM and ended up here ins
 
 This is a draft of my learnings of the pre-seed stage funding at [mindsdb](https://github.com/mindsdb/mindsdb)
 
-**[Read the Book](https://torrmal.github.io/shitff/)**
+**[Read the Book](https://torrmal.github.io/shtff/)**
 
 ---
 
