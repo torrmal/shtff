@@ -47,7 +47,7 @@ Hell yeah! just make PRs I will review them, or if you have more of a clue on wr
 
 ## Thanks
 
-Special thanks to my early-stage investors and friends: Chon, Shankar, Patrik, Chetan, and Navin. To my family, for always being there. To the team at MindsDB, and to all the friends who patiently listened to my nonstop rambling about fundraising being “a thing with rules.” A special thank you to Luis Silva for encouraging me to turn my notes into a PDF—and for enduring the pain of actually reading them. And finally, to my co-founder Adam, for joining me on the crazy ride of building a company together.
+Special thanks to my early-stage investors and friends:  Chon, JJ, Shankar, Patrik, Chetan, and Navin. To my family, for always being there. To the team at MindsDB, and to all the friends who patiently listened to my nonstop rambling about fundraising being “a thing with rules.” A special thank you to Luis Silva for encouraging me to turn my notes into a PDF—and for enduring the pain of actually reading them. And finally, to my co-founder Adam, for joining me on the crazy ride of building a company together.
 
 ## License
 
