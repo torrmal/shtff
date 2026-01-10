@@ -8,18 +8,18 @@
 \usepackage{amssymb}
 \usepackage{graphicx}
 \usepackage{geometry}
-\usepackage{hyperref}
 \usepackage{booktabs}
 \usepackage{listings}
 \usepackage{xcolor}
 \usepackage{titlesec}
-\usepackage{titletoc}
 \usepackage{fancyhdr}
 \usepackage[default]{sourceserifpro}
 \usepackage{microtype}
 \usepackage{tocloft}
 \usepackage{enumitem}
 \usepackage{setspace}
+% hyperref should be loaded last to ensure proper TOC linking
+\usepackage[hidelinks]{hyperref}
 
 % Professional book page setup
 \geometry{
@@ -41,10 +41,13 @@
 \definecolor{white}{RGB}{255, 255, 255}          % Pure White
 \definecolor{lightgray}{RGB}{245, 245, 245}      % Light Gray for backgrounds
 
-% Hyperlink setup - black and white
+% Hyperlink setup - black and white with clickable TOC
 \hypersetup{
-    colorlinks=false,
-    pdfborder={0 0 0},
+    hidelinks=true,        % Hide link borders (black and white)
+    linktoc=all,           % Make all TOC entries clickable
+    pdfstartview=FitH,     % Open PDF at fit width
+    bookmarksopen=true,    % Open bookmarks in PDF viewer
+    bookmarksopenlevel=2,  % Show chapters and sections in bookmarks
 }
 
 % Code listing setup - black and white
