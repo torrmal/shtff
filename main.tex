@@ -1,0 +1,163 @@
+\documentclass[11pt,twoside,openright]{book}
+
+% Packages
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{geometry}
+\usepackage{hyperref}
+\usepackage{booktabs}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{titlesec}
+\usepackage{titletoc}
+\usepackage{fancyhdr}
+\usepackage[default]{sourceserifpro}
+\usepackage{microtype}
+\usepackage{tocloft}
+\usepackage{enumitem}
+\usepackage{setspace}
+
+% Professional book page setup
+\geometry{
+    paperwidth=6in,
+    paperheight=9in,
+    margin=0.75in,
+    top=1in,
+    bottom=1.2in,
+    headheight=15pt,
+    headsep=25pt,
+    footskip=30pt
+}
+
+% Line spacing for readability
+\onehalfspacing
+
+% Black and white color scheme
+\definecolor{black}{RGB}{0, 0, 0}                % Pure Black
+\definecolor{white}{RGB}{255, 255, 255}          % Pure White
+\definecolor{lightgray}{RGB}{245, 245, 245}      % Light Gray for backgrounds
+
+% Hyperlink setup - black and white
+\hypersetup{
+    colorlinks=false,
+    pdfborder={0 0 0},
+}
+
+% Code listing setup - black and white
+\lstset{
+    basicstyle=\ttfamily\small,
+    keywordstyle=\bfseries,
+    commentstyle=\itshape,
+    stringstyle=,
+    numbers=left,
+    numberstyle=\tiny,
+    stepnumber=1,
+    numbersep=8pt,
+    backgroundcolor=\color{lightgray},
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    frame=single,
+    tabsize=2,
+    captionpos=b,
+    breaklines=true,
+    breakatwhitespace=false,
+    escapeinside={\%*}{*)}
+}
+
+% Professional headers and footers
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE]{\leftmark}
+\fancyhead[RO]{\rightmark}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+\renewcommand{\headrule}{\hbox to\headwidth{\leaders\hrule height \headrulewidth\hfill}}
+
+% Beautiful chapter and section styling
+\titleformat{\chapter}[display]
+{\normalfont\huge\bfseries}
+{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+
+\titleformat{\section}
+{\normalfont\Large\bfseries}
+{\thesection}{1em}{}
+
+\titleformat{\subsection}
+{\normalfont\large\bfseries}
+{\thesubsection}{1em}{}
+
+\titleformat{\subsubsection}
+{\normalfont\normalsize\bfseries}
+{\thesubsubsection}{1em}{}
+
+% Enhanced spacing for sections
+\titlespacing*{\chapter}{0pt}{50pt}{40pt}
+\titlespacing*{\section}{0pt}{3.5ex plus 1ex minus .2ex}{2.3ex plus .2ex}
+\titlespacing*{\subsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+\titlespacing*{\subsubsection}{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+% Professional table of contents styling
+\renewcommand{\cfttoctitlefont}{\huge\bfseries}
+\renewcommand{\cftchapfont}{\normalfont\bfseries}
+\renewcommand{\cftsecfont}{\normalfont}
+\renewcommand{\cftsubsecfont}{\normalfont}
+\renewcommand{\cftchapleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsecleader}{\cftdotfill{\cftdotsep}}
+\renewcommand{\cftsubsecleader}{\cftdotfill{\cftdotsep}}
+
+% Title information
+\title{SH*T\\For pre-seed founders looking for funding}
+\author{JT}
+\date{\today}
+
+\begin{document}
+
+% Title page
+\begin{titlepage}
+\centering
+\vspace*{2cm}
+
+{\fontsize{60}{72}\selectfont\bfseries SH*T\par}
+\vspace{0.5cm}
+{\Large\bfseries For Early-stage Founders Looking For Funding\par}
+\vspace{1.5cm}
+
+{\normalsize\itshape A joke masquerading as a business book, a spiritual guide through Silicon Valley's acid trip, written by a fellow founder who's been kicked in the teeth by reality so many times, they're now best friends who meet Thursdays for karaoke and questionable life choices. Minimum adult supervision recommended!
+\par}
+\vspace{2cm}
+
+{\large Your's Truly\par}
+\vspace{0.5cm}
+
+{\Large\bfseries JT\par}
+\vspace{2cm}
+
+
+
+\end{titlepage}
+
+% Table of contents
+\tableofcontents
+
+\newpage
+
+
+% Include the introduction chapter
+\input{../chapters/introduction}
+
+\input{../chapters/preseed_rules}
+
+\input{../chapters/preseed_risks}
+
+\input{../chapters/preseed_glossary}
+
+\input{../chapters/seed_risks}
+
+
+\end{document}
