@@ -53,7 +53,7 @@ Special thanks to my early-stage investors and friends: Chon, Shankar, Patrik, C
 
 GPL-3.0 with attribution required.
 
-Any modification or publication must credit **Jorge Torres**, because his ego runs on recognition and instant ramen, and both are non-negotiable.
+Any modification or publication must credit **JT**, because his ego runs on recognition and instant ramen, and both are non-negotiable.
 
 ---
 
