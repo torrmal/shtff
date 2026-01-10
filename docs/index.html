@@ -481,6 +481,23 @@
         .right-nav-inner {
             position: relative;
             padding-left: 20px;
+            max-height: 80vh;
+            overflow-y: auto;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+
+        .right-nav-inner::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .right-nav-inner::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .right-nav-inner::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 2px;
         }
 
         .right-nav-progress {
@@ -1153,6 +1170,8 @@
             <div class="nav-subsections" data-for="lingo"></div>
             <a href="#graduating" class="nav-link" data-chapter="graduating">Conclusion</a>
             <div class="nav-subsections" data-for="graduating"></div>
+            <a href="#credits" class="nav-link" data-chapter="credits">Credits</a>
+            <div class="nav-subsections" data-for="credits"></div>
         </div>
 
         <a href="book.pdf" class="nav-download" download>DOWNLOAD PDF</a>
@@ -1666,7 +1685,7 @@
         <article id="graduating" class="chapter fade-in">
             <div class="chapter-number">Conclusion</div>
             <h2 class="chapter-title">Graduating from Pre-seed to Seed Stage</h2>
-            <p>Oh, sweet Buddha riding a skateboard through a farmer's market, there's a glorious next level in this video game of venture-backed startups: the "seed round." To claw your way into this dimension, you must master execution risk. To understand this, imagine yourself blindfolded, juggling flaming chainsaws while riding a unicycle across a tightrope made of your own expectations, suspended over a pit of your parents' disappointment. Below you, a panel of VCs score your performance like Olympic judges who've replaced their morning coffee with pure, uncut ambition. That's what it feels like: you're expected to fundraise and build at the same time, which requires the focus of a Tibetan monk who's also somehow running a TikTok account, and the risk appetite of a guy who invests his life savings in a cryptocurrency named after a vegetable. Forget what your probability professor told you; here, in this game, the odds are against you like gravity is against a penguin with dreams of flight.</p>
+            <p>Oh, my sweet hipster riding a skateboard through a farmer's market, there's a glorious next level in this video game of venture-backed startups: the "seed round." To claw your way into this dimension, you must master execution risk. To understand this, imagine yourself blindfolded, juggling flaming chainsaws while riding a unicycle across a tightrope made of your own expectations, suspended over a pit of your parents' disappointment. Below you, a panel of VCs score your performance like Olympic judges who've replaced their morning coffee with pure, uncut ambition. That's what it feels like: you're expected to fundraise and build at the same time, which requires the focus of a Tibetan monk who's also somehow running a TikTok account, and the risk appetite of a guy who invests his life savings in a cryptocurrency named after a vegetable. Forget what your probability professor told you; here, in this game, the odds are against you like gravity is against a penguin with dreams of flight.</p>
 
             <div class="section">
                 <h3 class="section-title">The Seed End State</h3>
@@ -1713,6 +1732,14 @@
                 <p>Because what comes next; the actual seed round, yes, the priced round, where term sheets read like ancient scrolls written by lawyers who've clearly been mainlining espresso since the Reagan administration and speak in tongues of preferred stock and liquidation preferences; the art of closing a seed round while your bank account does its best impression of a desert mirage that keeps receding as you approach; that's a whole different circus. That's the circus where the clowns have law degrees and the trapeze is made of convertible notes.</p>
                 <p>So stay tuned, padawans. The sequel is coming, and it's going to make this look like a gentle warm-up, a light stretch before the real workout, a tutorial level before the boss fight. Because by the time you're ready for seed stage, you'll have earned the right to read about how to navigate a funding round that makes your pre-seed experience look like a pleasant afternoon tea with a very understanding grandmother who also happens to believe in you unconditionally and keeps refilling your cup.</p>
             </div>
+        </article>
+
+        <article id="credits" class="chapter fade-in">
+            <div class="chapter-number">Credits</div>
+            <h2 class="chapter-title">Thanks</h2>
+            <p>Special thanks to my early-stage investors and friends: Chon, JJ, Shankar, Patrik, Chetan, and Navin. To my family, for always being there. To the team at MindsDB, and to all the friends who patiently listened to my nonstop rambling about fundraising being "a thing with rules."</p>
+            <p>A special thank you to Luis Silva for encouraging me to turn my notes into a PDF—and for enduring the pain of actually reading them.</p>
+            <p>And finally, to my co-founder Adam, for joining me on the crazy ride of building a company together.</p>
         </article>
 
         <footer class="fade-in">
@@ -1882,8 +1909,13 @@
                 rightNavTitle.textContent = titleText.substring(0, 20) + (titleText.length > 20 ? '...' : '');
             }
 
-            // Get subsections (only main sections, not sub-subsections)
-            const sections = currentChapter.querySelectorAll('.section-title');
+            // Get subsections (for lingo chapter, use term words; for others, use section titles)
+            let sections;
+            if (currentChapter.id === 'lingo') {
+                sections = currentChapter.querySelectorAll('.term-word');
+            } else {
+                sections = currentChapter.querySelectorAll('.section-title');
+            }
 
             // Only update links if chapter changed
             const chapterId = currentChapter.id;
@@ -1948,7 +1980,14 @@
                 const subsectionsContainer = document.querySelector(`.nav-subsections[data-for="${chapterId}"]`);
                 if (!subsectionsContainer) return;
 
-                const sections = chapter.querySelectorAll('.section-title');
+                // For lingo chapter, use term words; for others, use section titles
+                let sections;
+                if (chapterId === 'lingo') {
+                    sections = chapter.querySelectorAll('.term-word');
+                } else {
+                    sections = chapter.querySelectorAll('.section-title');
+                }
+
                 subsectionsContainer.innerHTML = '';
 
                 sections.forEach((section, i) => {
