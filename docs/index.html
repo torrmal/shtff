@@ -213,11 +213,9 @@
         }
 
         .nav-section-title::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            background: var(--gray);
-            border-radius: 50%;
+            content: '▽';
+            font-size: 10px;
+            color: var(--gray);
         }
 
         .nav-link {
@@ -263,6 +261,40 @@
             opacity: 1;
             width: 6px;
             height: 6px;
+        }
+
+        .nav-subsections {
+            display: none;
+            padding-left: 1rem;
+            margin: 0.25rem 0 0.5rem 0;
+            border-left: 1px solid var(--border);
+        }
+
+        .nav-link.active + .nav-subsections {
+            display: block;
+        }
+
+        .nav-sub-link {
+            display: block;
+            color: var(--fg);
+            text-decoration: none;
+            padding: 0.35rem 0 0.35rem 0.75rem;
+            font-size: 0.75rem;
+            opacity: 0.5;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .nav-sub-link:hover {
+            opacity: 0.8;
+        }
+
+        @media (min-width: 1001px) {
+            .nav-subsections {
+                display: none !important;
+            }
         }
 
         .nav-download {
@@ -418,6 +450,140 @@
         .menu-toggle.active span:nth-child(3) {
             bottom: 50%;
             transform: translateY(50%) rotate(-45deg);
+        }
+
+        /* Right sidebar - subsection navigation */
+        .right-nav {
+            position: fixed;
+            right: 2rem;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 100;
+            display: none;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        @media (min-width: 1400px) {
+            .right-nav {
+                display: block;
+            }
+        }
+
+        .right-nav-inner {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .right-nav-progress {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 100%;
+            background: var(--border);
+        }
+
+        .right-nav-progress-fill {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 1px;
+            height: 0%;
+            background: var(--fg);
+            transition: height 0.3s ease;
+        }
+
+        .right-nav-title {
+            font-family: "Doto", sans-serif;
+            font-size: 0.55rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            opacity: 0.6;
+        }
+
+        .right-nav-link {
+            display: block;
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-decoration: none;
+            padding: 0.4rem 0;
+            transition: all 0.3s ease;
+            position: relative;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .right-nav-link::before {
+            content: '';
+            position: absolute;
+            left: -20px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 5px;
+            height: 5px;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            background: var(--bg);
+            transition: all 0.3s ease;
+        }
+
+        .right-nav-link:hover {
+            color: var(--fg);
+        }
+
+        .right-nav-link.active {
+            color: var(--fg);
+        }
+
+        .right-nav-link.active::before {
+            background: var(--fg);
+            border-color: var(--fg);
+        }
+
+        .right-nav-link.passed::before {
+            background: var(--fg);
+            border-color: var(--fg);
+            width: 3px;
+            height: 3px;
+        }
+
+        .right-nav-next {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--border);
+        }
+
+        .right-nav-next-label {
+            font-family: "Doto", sans-serif;
+            font-size: 0.5rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+            opacity: 0.5;
+            margin-bottom: 0.3rem;
+        }
+
+        .right-nav-next-title {
+            font-size: 0.7rem;
+            color: var(--fg);
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+            display: block;
+            max-width: 180px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        .right-nav-next-title:hover {
+            opacity: 0.7;
         }
 
         /* Main content */
@@ -965,15 +1131,20 @@
 
     <nav id="nav">
         <div class="nav-logo">SH*T</div>
-        <div class="nav-subtitle">Founder's Field Guide</div>
+        <div class="nav-subtitle">Founder's Field Guide to Funding</div>
 
         <div class="nav-section">
-            <div class="nav-section-title">Chapters</div>
-            <a href="#intro" class="nav-link">Introduction</a>
-            <a href="#rules" class="nav-link">1. The Five Rules</a>
-            <a href="#risks" class="nav-link">2. The Two Risks Theory</a>
-            <a href="#lingo" class="nav-link">3. Pre-seed Lingo</a>
-            <a href="#graduating" class="nav-link">Conclusion</a>
+            <div class="nav-section-title">Pre-Seed Realm</div>
+            <a href="#intro" class="nav-link" data-chapter="intro">Introduction</a>
+            <div class="nav-subsections" data-for="intro"></div>
+            <a href="#rules" class="nav-link" data-chapter="rules">1. The Five Rules</a>
+            <div class="nav-subsections" data-for="rules"></div>
+            <a href="#risks" class="nav-link" data-chapter="risks">2. The Two Risks Theory</a>
+            <div class="nav-subsections" data-for="risks"></div>
+            <a href="#lingo" class="nav-link" data-chapter="lingo">3. Pre-seed Lingo</a>
+            <div class="nav-subsections" data-for="lingo"></div>
+            <a href="#graduating" class="nav-link" data-chapter="graduating">Conclusion</a>
+            <div class="nav-subsections" data-for="graduating"></div>
         </div>
 
         <a href="book.pdf" class="nav-download" download>DOWNLOAD PDF</a>
@@ -990,6 +1161,20 @@
             <span style="opacity: 0.6">MindsDB</span>
         </div>
     </nav>
+
+    <aside class="right-nav" id="rightNav">
+        <div class="right-nav-inner">
+            <div class="right-nav-progress">
+                <div class="right-nav-progress-fill" id="progressFill"></div>
+            </div>
+            <div class="right-nav-title" id="rightNavTitle">Sections</div>
+            <div id="rightNavLinks"></div>
+            <div class="right-nav-next" id="rightNavNext" style="display: none;">
+                <div class="right-nav-next-label">Next</div>
+                <a href="#" class="right-nav-next-title" id="rightNavNextTitle"></a>
+            </div>
+        </div>
+    </aside>
 
     <main>
         <section class="hero" id="top">
@@ -1052,20 +1237,6 @@
 
                 <div class="subsection-title">Too late: You've already raised a large seed round</div>
                 <p>Once you nail down your pre-seed and seed rounds, once you've figured out how to make investors chase you instead of the other way around, you'll be ready for the real challenge: turning that seed-stage company into a cash-printing machine. That's a journey I am myself discovering, and therefore that's a story for another book.</p>
-            </div>
-
-            <div class="section">
-                <h3 class="section-title">So, what can you expect?</h3>
-                <p>I hope it is obvious to you, that I didn't write this book to give you a blueprint for success, because I truly don't know one. But I do know that success in this place can feel as arbitrary as the wind, a chaotic, bipolar storm that can either propel you to heights you never imagined or sweep you into the gutter.</p>
-                <p>This book is a response to all the things we didn't know as early stage founders, all the fundraising lessons we had to learn the hard way. If I could go back and do it all over again, I'd change so much that we'd have a few shaved years off the grind, or at least of barking at the wrong trees.</p>
-                <p>We made so many mistakes, who knows, maybe it's a miracle we survived. But each fuckup became a turning point, a chance to course-correct, and eventually, we started to see the underlying patterns in the chaos. These moments weren't just about improving our pitch. They were about stripping away the bullshit and asking ourselves the hard questions: Why the hell are we doing this? What's the real problem we're solving? In 5-10 years, will I still want to be working on this stuff?</p>
-
-                <div class="callout">
-                    "We realized something most founders miss: it's not just about pitching better. It's about fixing the core fundamentals of your business, so the pitch takes care of itself."
-                </div>
-
-                <p>So, here we are. You've read this far, which means you're either serious in wanting to be an entrepreneur, an early stage founder on the road to your first round. Or you're at least curious enough to stick around. This book is your guide, not a formula, but your rough roadmap to navigating the absurd, unpredictable, and utterly fascinating world of massive seed rounds in the Bay Area. And if we're lucky, it'll save you from making the same mistakes we did.</p>
-                <p><strong>Let's dive in.</strong></p>
             </div>
         </article>
 
@@ -1647,6 +1818,149 @@
                 }, 100);
             });
         });
+
+        // Right nav - subsection navigation
+        const rightNav = document.getElementById('rightNav');
+        const rightNavTitle = document.getElementById('rightNavTitle');
+        const rightNavLinks = document.getElementById('rightNavLinks');
+        const progressFill = document.getElementById('progressFill');
+        const rightNavNext = document.getElementById('rightNavNext');
+        const rightNavNextTitle = document.getElementById('rightNavNextTitle');
+
+        function updateRightNav() {
+            const chapters = document.querySelectorAll('article.chapter');
+            const chaptersArray = Array.from(chapters);
+            let currentChapter = null;
+            let currentIndex = -1;
+            const scrollPos = window.scrollY + window.innerHeight / 3;
+
+            // Find current chapter
+            chaptersArray.forEach((chapter, index) => {
+                const rect = chapter.getBoundingClientRect();
+                const top = rect.top + window.scrollY;
+                const bottom = top + rect.height;
+                if (scrollPos >= top && scrollPos < bottom) {
+                    currentChapter = chapter;
+                    currentIndex = index;
+                }
+            });
+
+            if (!currentChapter) {
+                rightNav.style.opacity = '0';
+                return;
+            }
+
+            rightNav.style.opacity = '1';
+
+            // Show next chapter
+            if (currentIndex < chaptersArray.length - 1) {
+                const nextChapter = chaptersArray[currentIndex + 1];
+                const nextTitle = nextChapter.querySelector('.chapter-title');
+                if (nextTitle) {
+                    rightNavNext.style.display = 'block';
+                    rightNavNextTitle.textContent = nextTitle.textContent;
+                    rightNavNextTitle.href = '#' + nextChapter.id;
+                }
+            } else {
+                rightNavNext.style.display = 'none';
+            }
+
+            // Get chapter title
+            const chapterTitle = currentChapter.querySelector('.chapter-title');
+            if (chapterTitle) {
+                const titleText = chapterTitle.textContent.split(':')[0] || chapterTitle.textContent;
+                rightNavTitle.textContent = titleText.substring(0, 20) + (titleText.length > 20 ? '...' : '');
+            }
+
+            // Get subsections (only main sections, not sub-subsections)
+            const sections = currentChapter.querySelectorAll('.section-title');
+
+            // Only update links if chapter changed
+            const chapterId = currentChapter.id;
+            if (rightNavLinks.dataset.chapter !== chapterId) {
+                rightNavLinks.dataset.chapter = chapterId;
+                rightNavLinks.innerHTML = '';
+
+                sections.forEach((section, i) => {
+                    const id = `section-${chapterId}-${i}`;
+                    section.id = id;
+                    const link = document.createElement('a');
+                    link.href = `#${id}`;
+                    link.className = 'right-nav-link';
+                    link.textContent = section.textContent;
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    });
+                    rightNavLinks.appendChild(link);
+                });
+            }
+
+            // Update active states and progress
+            const links = rightNavLinks.querySelectorAll('.right-nav-link');
+            let activeIndex = -1;
+
+            links.forEach((link, i) => {
+                const targetId = link.getAttribute('href').substring(1);
+                const target = document.getElementById(targetId);
+                if (target) {
+                    const rect = target.getBoundingClientRect();
+                    if (rect.top <= window.innerHeight / 2) {
+                        activeIndex = i;
+                    }
+                }
+                link.classList.remove('active', 'passed');
+            });
+
+            links.forEach((link, i) => {
+                if (i < activeIndex) {
+                    link.classList.add('passed');
+                } else if (i === activeIndex) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update progress bar
+            if (links.length > 0) {
+                const progress = ((activeIndex + 1) / links.length) * 100;
+                progressFill.style.height = Math.max(0, progress) + '%';
+            }
+        }
+
+        window.addEventListener('scroll', updateRightNav);
+        updateRightNav();
+
+        // Populate mobile nav subsections
+        function populateMobileSubsections() {
+            const chapters = document.querySelectorAll('article.chapter');
+            chapters.forEach(chapter => {
+                const chapterId = chapter.id;
+                const subsectionsContainer = document.querySelector(`.nav-subsections[data-for="${chapterId}"]`);
+                if (!subsectionsContainer) return;
+
+                const sections = chapter.querySelectorAll('.section-title');
+                subsectionsContainer.innerHTML = '';
+
+                sections.forEach((section, i) => {
+                    const id = section.id || `section-${chapterId}-${i}`;
+                    section.id = id;
+                    const link = document.createElement('a');
+                    link.href = `#${id}`;
+                    link.className = 'nav-sub-link';
+                    link.textContent = section.textContent;
+                    link.addEventListener('click', (e) => {
+                        e.preventDefault();
+                        document.getElementById('nav').classList.remove('visible');
+                        document.getElementById('menuToggle').classList.remove('active');
+                        setTimeout(() => {
+                            section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }, 300);
+                    });
+                    subsectionsContainer.appendChild(link);
+                });
+            });
+        }
+        populateMobileSubsections();
 
         // Parallax dots on scroll
         window.addEventListener('scroll', () => {
