@@ -1,0 +1,1302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH*T - For Early-stage Founders Looking For Funding</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Doto:wght@100..900&family=Source+Serif+4:ital,opsz,wght@0,8..60,200..900;1,8..60,200..900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0a0a0a;
+            --fg: #f5f5f5;
+            --gray: #888;
+            --accent: #fff;
+            --border: #222;
+        }
+
+        [data-theme="light"] {
+            --bg: #f5f5f5;
+            --fg: #0a0a0a;
+            --gray: #555;
+            --accent: #000;
+            --border: #ddd;
+        }
+
+        [data-theme="light"] nav {
+            background: rgba(245, 245, 245, 0.95);
+        }
+
+        [data-theme="light"] .chapter p {
+            color: rgba(10, 10, 10, 0.85);
+        }
+
+        [data-theme="light"] .nav-download {
+            background: var(--fg);
+            color: var(--bg);
+        }
+
+        [data-theme="light"] .nav-download:hover {
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        [data-theme="light"] .dot {
+            background: #ccc;
+        }
+
+        [data-theme="light"] .callout::before {
+            color: #ddd;
+        }
+
+        [data-theme="light"] .hero-circle {
+            border-color: #ddd;
+        }
+
+        [data-theme="light"] .menu-toggle {
+            background: var(--bg);
+            border-color: var(--border);
+            color: var(--fg);
+        }
+
+        [data-theme="light"] .menu-toggle:hover {
+            background: var(--fg);
+            color: var(--bg);
+        }
+
+        /* GitHub link */
+        .github-link {
+            position: fixed;
+            top: 1.5rem;
+            right: 1.5rem;
+            z-index: 200;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.6rem 1rem;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            text-decoration: none;
+            font-family: "Doto", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .github-link:hover {
+            background: var(--fg);
+            color: var(--bg);
+        }
+
+        .github-link svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: "Source Serif 4", Georgia, serif;
+            background: var(--bg);
+            color: var(--fg);
+            line-height: 1.8;
+            font-size: 18px;
+            overflow-x: hidden;
+        }
+
+        ::selection {
+            background: var(--fg);
+            color: var(--bg);
+        }
+
+        /* Dot grid background */
+        .dot-grid {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .dot {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: var(--gray);
+            border-radius: 50%;
+            animation: dotPulse 3s ease-in-out infinite;
+        }
+
+        @keyframes dotPulse {
+            0%, 100% { opacity: 0.2; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.5); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 300px;
+            height: 100vh;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(10px);
+            border-right: 1px solid var(--border);
+            padding: 2rem 1.5rem;
+            overflow-y: auto;
+            z-index: 100;
+            transform: translateX(0);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        nav::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        nav::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        nav::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 2px;
+        }
+
+        nav.hidden {
+            transform: translateX(-100%);
+        }
+
+        .nav-logo {
+            font-family: "Doto", sans-serif;
+            font-weight: 900;
+            font-size: 2.5rem;
+            letter-spacing: -2px;
+            margin-bottom: 0.25rem;
+            opacity: 0;
+            animation: slideIn 0.6s ease forwards;
+        }
+
+        .nav-subtitle {
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            animation: slideIn 0.6s ease 0.1s forwards;
+        }
+
+        .nav-section {
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: slideIn 0.6s ease 0.2s forwards;
+        }
+
+        .nav-section-title {
+            font-family: "Doto", sans-serif;
+            font-weight: 700;
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            color: var(--gray);
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .nav-section-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--gray);
+            border-radius: 50%;
+        }
+
+        .nav-link {
+            display: block;
+            color: var(--fg);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            font-size: 0.9rem;
+            opacity: 0.6;
+            transition: all 0.3s ease;
+            position: relative;
+            padding-left: 1rem;
+        }
+
+        .nav-link::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 4px;
+            height: 4px;
+            background: var(--fg);
+            border-radius: 50%;
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .nav-link:hover {
+            opacity: 1;
+            padding-left: 1.5rem;
+        }
+
+        .nav-link:hover::before {
+            opacity: 1;
+        }
+
+        .nav-link.active {
+            opacity: 1;
+        }
+
+        .nav-link.active::before {
+            opacity: 1;
+            width: 6px;
+            height: 6px;
+        }
+
+        .nav-download {
+            display: block;
+            margin-top: 2rem;
+            padding: 1rem 1.5rem;
+            background: var(--fg);
+            color: var(--bg);
+            text-decoration: none;
+            font-family: "Doto", sans-serif;
+            font-weight: 700;
+            font-size: 0.75rem;
+            letter-spacing: 2px;
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-download::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,0,0,0.1), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .nav-download:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 40px rgba(255,255,255,0.15);
+        }
+
+        .nav-download:hover::before {
+            left: 100%;
+        }
+
+        .nav-credits {
+            margin-top: 2rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.75rem;
+            color: var(--gray);
+            opacity: 0;
+            animation: slideIn 0.6s ease 0.4s forwards;
+        }
+
+        /* Theme toggle */
+        .theme-toggle {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-top: 1.5rem;
+            padding: 0.75rem 0;
+            cursor: pointer;
+            font-family: "Doto", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .theme-toggle:hover {
+            color: var(--fg);
+        }
+
+        .toggle-track {
+            width: 44px;
+            height: 24px;
+            background: var(--border);
+            border-radius: 12px;
+            position: relative;
+            transition: background 0.3s ease;
+        }
+
+        .toggle-thumb {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            width: 18px;
+            height: 18px;
+            background: var(--fg);
+            border-radius: 50%;
+            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        [data-theme="light"] .toggle-track {
+            background: #ccc;
+        }
+
+        [data-theme="light"] .toggle-thumb {
+            transform: translateX(20px);
+            background: #0a0a0a;
+        }
+
+        .toggle-icon {
+            font-size: 1rem;
+        }
+
+        /* Mobile menu toggle */
+        .menu-toggle {
+            display: none;
+            position: fixed;
+            top: 1.5rem;
+            left: 1.5rem;
+            z-index: 200;
+            background: var(--bg);
+            border: 1px solid var(--border);
+            color: var(--fg);
+            padding: 0.75rem 1.25rem;
+            font-family: "Doto", sans-serif;
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .menu-toggle:hover {
+            background: var(--fg);
+            color: var(--bg);
+        }
+
+        /* Main content */
+        main {
+            margin-left: 300px;
+            min-height: 100vh;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Hero */
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .hero-circle {
+            position: absolute;
+            border: 1px solid var(--border);
+            border-radius: 50%;
+            animation: circleExpand 8s ease-in-out infinite;
+        }
+
+        .hero-circle:nth-child(1) {
+            width: 200px;
+            height: 200px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 0s;
+        }
+
+        .hero-circle:nth-child(2) {
+            width: 400px;
+            height: 400px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 1s;
+        }
+
+        .hero-circle:nth-child(3) {
+            width: 600px;
+            height: 600px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation-delay: 2s;
+        }
+
+        @keyframes circleExpand {
+            0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
+            50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.1); }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-title {
+            font-family: "Doto", sans-serif;
+            font-weight: 900;
+            font-size: clamp(5rem, 18vw, 14rem);
+            letter-spacing: -8px;
+            line-height: 0.85;
+            opacity: 0;
+            animation: heroReveal 1s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-top: 2rem;
+            max-width: 450px;
+            opacity: 0;
+            animation: heroReveal 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
+        }
+
+        .hero-author {
+            font-family: "Doto", sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-top: 2rem;
+            opacity: 0;
+            animation: heroReveal 1s cubic-bezier(0.4, 0, 0.2, 1) 0.5s forwards;
+        }
+
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            font-family: "Doto", sans-serif;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gray);
+            opacity: 0;
+            animation: fadeIn 1s ease 1.5s forwards;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .scroll-dots {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .scroll-dot {
+            width: 4px;
+            height: 4px;
+            background: var(--gray);
+            border-radius: 50%;
+            animation: scrollDot 1.5s ease-in-out infinite;
+        }
+
+        .scroll-dot:nth-child(2) { animation-delay: 0.2s; }
+        .scroll-dot:nth-child(3) { animation-delay: 0.4s; }
+
+        @keyframes scrollDot {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+
+        @keyframes heroReveal {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-20px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Chapter sections */
+        .chapter {
+            padding: 8rem 5rem;
+            max-width: 850px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .chapter::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5rem;
+            right: 5rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .chapter-number {
+            font-family: "Doto", sans-serif;
+            font-weight: 900;
+            font-size: 0.65rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .chapter-number::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border);
+            max-width: 100px;
+        }
+
+        .chapter-title {
+            font-family: "Doto", sans-serif;
+            font-weight: 800;
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            letter-spacing: -2px;
+            line-height: 1.05;
+            margin-bottom: 2.5rem;
+        }
+
+        .chapter p {
+            margin-bottom: 1.75rem;
+            color: rgba(245, 245, 245, 0.85);
+        }
+
+        .chapter strong {
+            color: var(--fg);
+            font-weight: 600;
+        }
+
+        .section {
+            margin-top: 5rem;
+        }
+
+        .section-title {
+            font-family: "Doto", sans-serif;
+            font-weight: 700;
+            font-size: 1.6rem;
+            letter-spacing: -0.5px;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: var(--fg);
+            border-radius: 50%;
+        }
+
+        .subsection-title {
+            font-family: "Doto", sans-serif;
+            font-weight: 600;
+            font-size: 1.1rem;
+            margin-top: 3rem;
+            margin-bottom: 1rem;
+            color: var(--gray);
+            letter-spacing: 0.5px;
+        }
+
+        /* Glossary term styling */
+        .term {
+            margin-top: 4rem;
+            padding-top: 3rem;
+            border-top: 1px solid var(--border);
+            position: relative;
+        }
+
+        .term:first-of-type {
+            border-top: none;
+            padding-top: 0;
+            margin-top: 3rem;
+        }
+
+        .term-word {
+            font-family: "Doto", sans-serif;
+            font-weight: 800;
+            font-size: 2rem;
+            letter-spacing: -1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .term-pronunciation {
+            font-style: italic;
+            color: var(--gray);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .term-type {
+            font-family: "Doto", sans-serif;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--gray);
+            margin-bottom: 1.25rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .term-type::before {
+            content: '';
+            width: 4px;
+            height: 4px;
+            background: var(--gray);
+            border-radius: 50%;
+        }
+
+        .term-definition {
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Quote/callout */
+        .callout {
+            border-left: 2px solid var(--fg);
+            padding: 1.5rem 0 1.5rem 2rem;
+            margin: 3rem 0;
+            font-style: italic;
+            font-size: 1.2rem;
+            color: var(--gray);
+            position: relative;
+        }
+
+        .callout::before {
+            content: '"';
+            font-family: "Doto", sans-serif;
+            font-size: 4rem;
+            font-weight: 900;
+            position: absolute;
+            top: 0;
+            left: -0.5rem;
+            color: var(--border);
+            line-height: 1;
+        }
+
+        /* Footer */
+        footer {
+            padding: 8rem 5rem;
+            text-align: center;
+            position: relative;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+        footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 5rem;
+            right: 5rem;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--border), transparent);
+        }
+
+        .footer-title {
+            font-family: "Doto", sans-serif;
+            font-weight: 900;
+            font-size: clamp(2rem, 5vw, 4rem);
+            letter-spacing: -2px;
+            margin-bottom: 2rem;
+        }
+
+        .footer-text {
+            color: var(--gray);
+            font-style: italic;
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+        }
+
+        .footer-cta {
+            font-family: "Doto", sans-serif;
+            font-weight: 700;
+            font-size: 1.3rem;
+            margin-top: 3rem;
+            letter-spacing: -0.5px;
+        }
+
+        .footer-dots {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 3rem 0;
+        }
+
+        .footer-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--gray);
+            border-radius: 50%;
+        }
+
+        /* Responsive */
+        @media (max-width: 1000px) {
+            nav {
+                transform: translateX(-100%);
+            }
+
+            nav.visible {
+                transform: translateX(0);
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            main {
+                margin-left: 0;
+            }
+
+            .chapter {
+                padding: 5rem 2rem;
+            }
+
+            .chapter::before {
+                left: 2rem;
+                right: 2rem;
+            }
+
+            footer {
+                padding: 5rem 2rem;
+            }
+
+            footer::before {
+                left: 2rem;
+                right: 2rem;
+            }
+        }
+
+        /* Scroll animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Loading screen */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #f5f5f5;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .loader-text {
+            color: #0a0a0a;
+        }
+
+        [data-theme="dark"] .loader {
+            background: #0a0a0a;
+        }
+
+        [data-theme="dark"] .loader-text {
+            color: #f5f5f5;
+        }
+
+        .loader.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        .loader-text {
+            font-family: "Doto", sans-serif;
+            font-weight: 900;
+            font-size: 3rem;
+            animation: loaderPulse 1s ease-in-out infinite;
+        }
+
+        @keyframes loaderPulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <div class="loader" id="loader">
+        <div class="loader-text">SH*T</div>
+    </div>
+
+    <div class="dot-grid" id="dotGrid"></div>
+
+    <button class="menu-toggle" onclick="toggleNav()">MENU</button>
+
+    <a href="https://github.com/torrmal/shitff" target="_blank" class="github-link">
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
+        GITHUB
+    </a>
+
+    <nav id="nav">
+        <div class="nav-logo">SH*T</div>
+        <div class="nav-subtitle">Founder's Field Guide</div>
+
+        <div class="nav-section">
+            <div class="nav-section-title">Chapters</div>
+            <a href="#intro" class="nav-link">Introduction</a>
+            <a href="#rules" class="nav-link">1. The Five Rules</a>
+            <a href="#risks" class="nav-link">2. The Two Risks Theory</a>
+            <a href="#lingo" class="nav-link">3. Pre-seed Lingo</a>
+            <a href="#graduating" class="nav-link">Conclusion</a>
+        </div>
+
+        <a href="book.pdf" class="nav-download" download>DOWNLOAD PDF</a>
+
+        <div class="theme-toggle" onclick="toggleTheme()">
+            <div class="toggle-track">
+                <div class="toggle-thumb"></div>
+            </div>
+            <span class="toggle-label">Light Mode</span>
+        </div>
+
+        <div class="nav-credits">
+            By Jorge Torres<br>
+            <span style="opacity: 0.6">MindsDB</span>
+        </div>
+    </nav>
+
+    <main>
+        <section class="hero" id="top">
+            <div class="hero-bg">
+                <div class="hero-circle"></div>
+                <div class="hero-circle"></div>
+                <div class="hero-circle"></div>
+            </div>
+            <div class="hero-content">
+                <h1 class="hero-title">SH*T</h1>
+                <p class="hero-subtitle">For Early-stage Founders Looking For Funding<br><strong>PART 1: Pre-Seed Stage</strong></p>
+                <p class="hero-tagline" style="font-style: italic; color: var(--gray); max-width: 500px; margin-top: 1.5rem; font-size: 0.95rem;">A spiritual guide through Silicon Valley's acid trip, written by a fellow founder who's been kicked in the teeth by reality so many times, they're now best friends who meet Thursdays for questionable life choices.</p>
+                <p class="hero-author">By JT</p>
+            </div>
+            <div class="hero-scroll">
+                Scroll to begin
+                <div class="scroll-dots">
+                    <div class="scroll-dot"></div>
+                    <div class="scroll-dot"></div>
+                    <div class="scroll-dot"></div>
+                </div>
+            </div>
+        </section>
+
+        <article id="intro" class="chapter fade-in">
+            <div class="chapter-number">Introduction</div>
+            <h2 class="chapter-title">Introduction</h2>
+            <p>If you have it in you. Whatever that is, there's something seductive about the Bay Area, something that draws you in like a moth to a flickering light. But behind that glittering surface, there's a dark swirl of uncertainty, where even the boldest ideas can live in constant superposition of death and alive. That is what this book is about. Not the glossy headlines or the Silicon Valley mythology, but the real pains: the blood, the sweat, and the game of hidden rules I wish we had known about before diving headfirst into the madness of being a founder looking for funding.</p>
+
+            <div class="section">
+                <h3 class="section-title">Why this book?</h3>
+                <p>Let me briefly introduce myself and explain why I wrote this book. I'm JT, CEO of MindsDB, a company I co-founded with my dear friend Adam C. In the end of 2023, we raised a $47M seed round from some of the best investors in the world. How did we, the chihuahuas in a pitbull fight, managed to do that?—that's the question I get from many early-stage founders or aspiring founders. Now, depending on the circles you run in, $47M might be seen as either a drop in the ocean or a staggering amount of cash. But, in most circles, that's a pretty decent seed round.</p>
+                <p>For us, it didn't come easy, and it sure as hell didn't happen overnight. Before that seed round, we had gone through a wild journey of raising about $8 million in pre-seed money, and so much could have been done differently. So, a year ago, as a way to blow off steam, I decided to write 3-4 pages every weekend to send to those who ever so often come to me and asking fundraising questions and like us—plucky little scamps—are walking that early startup journey and need funding to make it happen.</p>
+                <p>What matters here isn't just how much we raised, but the brutal learning curve it took to get there—the fuckups, the close calls, the lessons they don't teach you in any classroom or startup accelerator. And trust me, we've had our share of those. There are great books on the business principles needed to get from nothing to "scale up" (and please, read them). These tales are only from the fundraising perspective. We learned that no one gives you the real picture for surviving the actual sh*t and the unspoken rules that can make or break your first big round.</p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Who is this book for?</h3>
+                <p>Specifically, this book is for you if you're somewhere between "I have an idea, this idea needs some moolah to get it off the ground" and "I am just working on a seed round that would make grandma faint." The focus here is just the fundraising part, what is covered in this book is just but one part of a long journey of building a company.</p>
+                <p>This book is for the dreamers who've decided that working for someone else's dream is about as riveting as watching someone else's loading bar reach 99%. In particular, I wrote this for the underdogs. The ones who don't have a Stanford MBA, a family trust fund, or a cousin who's best friends with Marc Andreessen's barber.</p>
+
+                <div class="subsection-title">You're fresh out of college or before that</div>
+                <p>Congratulations, you still get carded at the bar and your liver is younger than most houseplants. Still clueless after graduation? Welcome to the club of many! If you have no idea what to do with your life, join a startup that's tackling a problem so big it makes your parents question your sanity. Worst case, you'll learn what not to do. Best case, you'll accidentally stumble into your life's work while eating ramen at 2am with people who also have no idea what they're doing.</p>
+
+                <div class="subsection-title">You're still working that cushy corporate gig</div>
+                <p>There's a greater than zero chance that you're still working that cushy corporate gig, the one with the nice benefits, the reliable paycheck, the reassuring stability of a 401k that seems to stretch out into your comfortable retirement. You're good at navigating the slow, bureaucratic machinery of the corporate world. And let's face it—you've gotten pretty damn good at milking it, haven't you? But every once in a while, something inside you stirs. Something tells you that maybe—just maybe—you're wasting your life.</p>
+                <p>If you and I are made of the same, that itch doesn't go away. I believe, it is very likely that one day, too old to hold your farts, while reflecting on the reflection of your saggy butt cheeks in the mirror, you'll look back at your safe life, your stack of savings, your perfectly planned but shrinking future, and you'll ask yourself: What would have happened if I asked for that phone number,... what might have been if I'd just taken the leap,... what did I miss?</p>
+
+                <div class="subsection-title">You're already a founder</div>
+                <p>Maybe, naive enough, you've already made that leap, and… you're here because you're drowning or like a confused penguin desperately flapping its wings trying to fly before it hits the ground. Trust me, I know how it feels. One day, you're walking on water, feeling like you've cracked the code, like the world is suddenly obvious. And the next, you're gasping for air, trying to claw your way out from under an iceberg that's crushing you. Welcome to the rodeo cowgirls and cowboys. You've chosen this life, and hopefully this book helps you f'it up a bit less.</p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Who is this book NOT good for?</h3>
+                <p>You are either too early or too late for the journey covered in this book.</p>
+
+                <div class="subsection-title">Too early: You're in college and have no idea what problem to solve</div>
+                <p>You haven't found a problem to work on yet, don't panic, this is not a sign from the universe to drop out and become the next Zuckerberg. Ignore the Twitter morons who say "college is for sheep." If you're in college and you don't know what startup to build, stay put! College is like a cheat code for life: it's a magical zoo where you can observe every species of human disaster.</p>
+
+                <div class="subsection-title">Too late: You've already raised a large seed round</div>
+                <p>Once you nail down your pre-seed and seed rounds, once you've figured out how to make investors chase you instead of the other way around, you'll be ready for the real challenge: turning that seed-stage company into a cash-printing machine. That's a journey I am myself discovering, and therefore that's a story for another book.</p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">So, what can you expect?</h3>
+                <p>I hope it is obvious to you, that I didn't write this book to give you a blueprint for success, because I truly don't know one. But I do know that success in this place can feel as arbitrary as the wind, a chaotic, bipolar storm that can either propel you to heights you never imagined or sweep you into the gutter.</p>
+                <p>This book is a response to all the things we didn't know as early stage founders, all the fundraising lessons we had to learn the hard way. If I could go back and do it all over again, I'd change so much that we'd have a few shaved years off the grind, or at least of barking at the wrong trees.</p>
+                <p>We made so many mistakes, who knows, maybe it's a miracle we survived. But each fuckup became a turning point, a chance to course-correct, and eventually, we started to see the underlying patterns in the chaos. These moments weren't just about improving our pitch. They were about stripping away the bullshit and asking ourselves the hard questions: Why the hell are we doing this? What's the real problem we're solving? In 5-10 years, will I still want to be working on this stuff?</p>
+
+                <div class="callout">
+                    "We realized something most founders miss: it's not just about pitching better. It's about fixing the core fundamentals of your business, so the pitch takes care of itself."
+                </div>
+
+                <p>So, here we are. You've read this far, which means you're either serious in wanting to be an entrepreneur, an early stage founder on the road to your first round. Or you're at least curious enough to stick around. This book is your guide, not a formula, but your rough roadmap to navigating the absurd, unpredictable, and utterly fascinating world of massive seed rounds in the Bay Area. And if we're lucky, it'll save you from making the same mistakes we did.</p>
+                <p><strong>Let's dive in.</strong></p>
+            </div>
+        </article>
+
+        <article id="rules" class="chapter fade-in">
+            <div class="chapter-number">Chapter 01</div>
+            <h2 class="chapter-title">The Five Rules of Pre-Seed Stage</h2>
+            <p>Picture yourself in a dimly lit room where reality itself seems to flicker and waver, like a poorly tuned TV channel picking up signals from another dimension. This is the Idea-stage of a startup, where your idea exists in a quantum superposition of brilliant and catastrophic, alive and dead, unicorn and paperweight. Like Schrödinger's startup, until someone opens the box of market validation, you exist in all states simultaneously.</p>
+            <p>In this realm of pure potential, your idea floats like a ghostly butterfly in the void, neither fully formed nor completely imaginary. It's less a business plan and more a shared hallucination between you and whoever's brave enough to look into your eyes when you speak about it.</p>
+
+            <div class="section">
+                <h3 class="section-title">Rule 1: All Startup Ideas Are Shit Ideas Until They Aren't</h3>
+                <p>Sunshine, let's get real here. Investors: They're basically professional truffle pigs, rooting through the mud of mediocrity hoping to find that one precious nugget that doesn't smell like desperation and delusion. At this point, chances are, your idea is about as useful as an ejector seat in a helicopter. No one, other than your daddy is there to worship at your PowerPoint altar or marvel at your revolutionary plan to disrupt the artisanal sock puppet market.</p>
+                <p>The real game here, Love, and trust me on this like you'd trust a New York rat's restaurant recommendations: is surviving long enough for the market to wake up and smell the disruption or for you to find a real problem. Sometimes you'll find yourself sitting pretty, with exactly the right solution when the world finally catches up to your genius. Other times? You'll have to take your precious baby of a solution out for a spartan cliff drop.</p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Rule 2: You Need to Grow the Skin of a Fucking Lizard</h3>
+                <p>Forget those Hollywood montages where success arrives faster than a Silicon Valley bro can say "A.I". Sure, there are some lucky bastards out there who catch lightning in a bottle and ride it straight to TechCrunch headlines. But for the rest of us mere mortals? The pre-seed stage isn't some heroic sprint to glory; it's more like trying to survive a zombie apocalypse while wearing havaianas.</p>
+                <p>If you haven't yet mastered the art of getting rejected more times than a Nigerian prince's email asking for social security numbers, don't sweat it. This line of work will give you a Post Doc in rejection faster than you can say "so,.. what do you think?" Your skin will grow thicker than a rhinoceros wearing kevlar, it has to.</p>
+
+                <div class="subsection-title">Rule 2.1: YOU NEED TO BE IN LOVE WITH THE PROBLEM!</div>
+                <p><strong>If you can't see yourself doing this for the next 10 years, don't do it.</strong> If you can't picture yourself still doing this particular startup when your future self is explaining to their therapist why you named your firstborn "Series A," then for the love of all that's holy and cute, stop right now. If the problem, the industry that you picked to solve is not something you would want to solve for the next many years, don't do it. <strong>Life is in fact short.</strong></p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Rule 3: Time Is Money—And You're Bleeding Both</h3>
+                <p>As you progress through the various stages of pre-seed funding, the dance with time becomes a knife fight. Investors at this level value speed as much as you do; they aren't looking to become pen pals. Time is the ultimate currency, and at this stage, it's a cruel and impatient god.</p>
+                <p>For pre-seed, the funding time metrics are stark: one call should be enough for tens of thousands. One or two calls or meetings should be sufficient to pull in hundreds of thousands. To hit the millions, three or four meetings max. If you find yourself deep in a labyrinth of endless investor lunches, long email chains, and vague promises, stop. You're stroking the wrong cat, and both sides are wasting precious hours.</p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Rule 4: Avoid the Wrong Investors</h3>
+                <p>Hear me out and repeat: <strong>"Only take money from people who can laugh while watching it evaporate."</strong> Not because you're planning to fail—you'll work harder than a rat on a cocaine-coated wheel—but because this is pre-seed, baby. The odds against you are about as friendly as an Australian Magpie in mating season.</p>
+
+                <div class="subsection-title">Warning: Friends, fools, and family round</div>
+                <p>Some call pre-seed that, and if you ever hear this advice, heed me: <strong>run</strong>. Run like hell. You are not a con artist peddling snake oil! <strong>DO NOT take the money that grandma saved for your mother's rainy day!</strong> At this stage, when you can't tell your ass from your hand, that money is better off in the S&P 500.</p>
+
+                <div class="subsection-title">Warning: You'll meet the "advisors"</div>
+                <p>Those beings who offer their "expertise" in exchange for equity. They'll promise introductions that never materialize, like crypto gains in a bear market. When they come at you with their advisory agreement PDFs, hit them with the ultimate uno reverse card: "Love your enthusiasm! How about you put some skin in the game? A small check would really align our interests..." Watch them disappear faster than free pizza at a developer meetup.</p>
+            </div>
+
+            <div class="section">
+                <h3 class="section-title">Rule 5: IT IS NOT a Single Round; It's an Ongoing Round</h3>
+                <p>Here's where the illusion shatters: raising at pre-seed isn't a dramatic all-or-nothing moment with champagne and applause. It's an ongoing battle, a financial siege. Investments at this stage are a mosaic of SAFEs and convertible notes, pieced together as you scramble for validation and resources.</p>
+                <p>The beautiful absurdity of it all: in the beginning, everyone's waiting for someone else to make the first move. It's like trying to start a conga line at a particularly stiff corporate party: nobody wants to be the first to wiggle their hips. But once a few people join in, suddenly everyone's an enthusiastic dancer.</p>
+
+                <div class="callout">
+                    "Walking into a room announcing 'I'm raising a few million' with empty pockets is like trying to sell timeshares on Mars. But watch how the story transforms: 'We're raising 100k and already have 50k'—now you're selling tickets to a party that's already buzzing."
+                </div>
+
+                <div class="subsection-title">Stage 1: The "Please, Anyone?" Phase ($10k-100k)</div>
+                <p>This is where you're basically selling hope wrapped in a PowerPoint. Angels look at you the way a parent looks at a child trying to explain why drawing on the walls is actually art. But here's the thing: you only need one believer.</p>
+
+                <div class="subsection-title">Stage 2: The "Hey, We're Kind of Real" Phase ($100k-200k)</div>
+                <p>Suddenly, you have that magical first check. It's like getting your first kiss; awkward, probably could have gone better, but hey, someone thought you were worth it!</p>
+
+                <div class="subsection-title">Stage 3: The "Now We're Cooking" Phase ($200k-500k)</div>
+                <p>This is where the momentum builds faster than technical debt in a hackathon. Each "yes" breeds more "yeses" like rabbits discovering Viagra. Investors start responding to your emails faster than they ghosted you in Stage 1.</p>
+
+                <div class="subsection-title">Stage 4: The "Is This Real Life?" Phase ($500k+)</div>
+                <p>Welcome to the line for the entry leagues. You are raising $1m and you already have $500k. And now you know how this game works, you can go up to a few million this way.</p>
+            </div>
+        </article>
+
+        <article id="lingo" class="chapter fade-in">
+            <div class="chapter-number">Chapter 03</div>
+            <h2 class="chapter-title">Pre-seed Startup Lingo</h2>
+            <p>Before you wander any further into this jungle of jargon, let me prepare you for what lies ahead. What follows is a collection of words that, in any sane context, would mean absolutely nothing; or worse, something entirely different.</p>
+            <p>But here, in the fever swamp of startup culture, these terms are sacred incantations, passwords whispered at networking events by people who've replaced their personalities with pitch decks. Learn them. Memorize them. Tattoo them on the inside of your eyelids if you must.</p>
+            <p>Because nothing says "I don't belong here" quite like asking what a SAFE is while standing next to a VC who's already mentally calculating how fast they can escape this conversation. Consider this your Rosetta Stone for decoding the beautiful nonsense that is startup speak.</p>
+
+            <div class="term">
+                <div class="term-word">Value</div>
+                <div class="term-pronunciation">| ˈval-yü |</div>
+                <div class="term-type">noun-verb [founder units]</div>
+                <p class="term-definition">Value is a mental process</p>
+                <p>Value is the mental process that someone goes through when they look at something and compare it to their needs and wants. In this book, those needs and wants are to solve a problem they have. Repeat this ten times.</p>
+            </div>
+
+            <div class="term">
+                <div class="term-word">Idea</div>
+                <div class="term-pronunciation">| ī-ˈdē-a |</div>
+                <div class="term-type">concept [sanity chewer]</div>
+                <p class="term-definition">Your idea is to solve a problem</p>
+                <p>Here's the only tattoo-worthy advice in this book: Every time your brain whispers, "I have a business idea," slap it and yell, "No! I have a problem to destroy!" If your "idea" isn't a desperate attempt to fix something that's been chewing on your sanity like a raccoon in your attic, you're in urgent need to get back to the drawing board.</p>
+            </div>
+
+            <div class="term">
+                <div class="term-word">Runway</div>
+                <div class="term-pronunciation">| ˈrən-wā |</div>
+                <div class="term-type">noun [survival countdown]</div>
+                <p class="term-definition">How long you can survive without raising more money?</p>
+                <p>Runway is the number of days/months/years between now and "the moment you start eyeing your houseplants as potential salad." It's simple math: take the cash in your bank, divide by how fast you're burning it, and voilà; that's how long you have before you're pitching VCs from a Starbucks bathroom.</p>
+            </div>
+
+            <div class="term">
+                <div class="term-word">Bay Area</div>
+                <div class="term-pronunciation">| ˈbā ˈer-ē-ə |</div>
+                <div class="term-type">proper noun [Vegas for nerds]</div>
+                <p class="term-definition">Where hoodies are formalwear</p>
+                <p>Picture a Las Vegas casino at 3 AM, that liminal hour when reality starts to fray at the edges. The Bay Area is a more sophisticated version of this tableau; a high-stakes playground where dreams are currency and reality bends like light through fiber optic cables. It's a place where people that want to solve problems with technology meet with risk gurus that manage the highest concentration of "fuck-yeah-capital" in the world.</p>
+            </div>
+
+            <div class="term" id="investors">
+                <div class="term-word">Investors</div>
+                <div class="term-pronunciation">| in-ˈves-tərz |</div>
+                <div class="term-type">players [money whisperers]</div>
+                <p class="term-definition">The risk philosopher</p>
+                <p>They're pattern-recognition savants who've transformed spectacular failures and meteoric successes into a kind of muscle memory. For them, risk isn't some mystical force to be feared or worshiped; it's as fundamental as gravity, as quotidian as breathing. Their real fascination lies in watching how you dance with these inevitable dangers.</p>
+            </div>
+
+            <div class="term" id="safe">
+                <div class="term-word">SAFE Agreements</div>
+                <div class="term-pronunciation">| ˈsāf ə-ˈgrē-mənts |</div>
+                <div class="term-type">agreements [startup prenup]</div>
+                <p class="term-definition">The startup world's prenup template</p>
+                <p>A SAFE is a document that outlines the terms of your early-stage investment. Every founder since 2013 who's ever hallucinated a unicorn after their third Red Bull has used a SAFE; so unless you're Picasso with a law degree, don't try to get creative here. Study the damn thing, sign it, and get back to building.</p>
+            </div>
+
+            <div class="term" id="fundraising">
+                <div class="term-word">Fundraising</div>
+                <div class="term-pronunciation">| ˈfənd-rā-ziŋ |</div>
+                <div class="term-type">activity [survival mode]</div>
+                <p class="term-definition">Convincing people to invest in your company</p>
+                <p>At pre-seed stage, fundraising is a constant. You are always fundraising and building your business at the same time. You're going to get better at it every single day, if you spend time to improve from feedback. The process will, in part, feel like collecting Pokémon.</p>
+            </div>
+
+            <div class="term">
+                <div class="term-word">Ghosting and Rejection</div>
+                <div class="term-pronunciation">| ˈgōs-tiŋ |</div>
+                <div class="term-type">experience [character building]</div>
+                <p class="term-definition">Welcome to Plan C</p>
+                <p>So, the accelerator gods have ghosted you harder than that Tinder date who saw you accidentally snort wasabi thinking it was guacamole. Welcome to Plan C, mijo; the path of pure, unfiltered hustle through the digital trenches of LinkedIn and networking shenanigans. Remember Rule #2 like it's your new religion: Never. Ever. Give. Up.</p>
+            </div>
+        </article>
+
+        <article id="risks" class="chapter fade-in">
+            <div class="chapter-number">Chapter 02</div>
+            <h2 class="chapter-title">The Two Risks Theory</h2>
+            <p>Early-stage funding isn't just about money; it's about the psychology of parting ways with perfectly good cash and handing it to someone who is, let's face it, basically a stranger with a PowerPoint. It's about understanding the beautiful madness that makes someone look at your half-baked idea and think, "Yes, I would like to set some perfectly good money on fire in the hopes that this particular flame might turn into a phoenix."</p>
+            <p>In the pre-seed stage, there are really only two fundamental risks that matter: market risk and founder risk. They dance together like drunk philosophers at a Silicon Valley meditation retreat. You must learn to master those risks if you ever want to get past the starting line of your startup.</p>
+
+            <div class="section" id="market-risk">
+                <h3 class="section-title">Market Risk</h3>
+                <p>Market risk is like that friend who keeps telling you they'll definitely come to your party but never shows up, and when they do show up, it's to a different party, at a different address, in a different dimension. It's the risk that even if you build exactly what you set out to build, even if you execute flawlessly, the market might just ghost you like a bad Hinge date who saw you park your 2003 Honda Civic.</p>
+                <p>This is the risk that should keep you, early-stage founder, awake at 3 AM, staring at the ceiling until you are convinced that the market you are going after is enormous; not "my mom thinks it's a great idea" enormous, but "small nations would trade their GDP for a piece of this" enormous.</p>
+                <p>Here's rule of thumb #1: if you can't multiply the number of potential customers by the price they'd actually pay and get to at least a billion dollars, you're in trouble. It'll shine through your pitch like a disco ball at a funeral, catching every investor's eye for all the wrong reasons.</p>
+
+                <div class="callout">
+                    "Startups don't die because their tech stack wasn't perfect; they die because they built something as useful as a submarine with a sunroof."
+                </div>
+            </div>
+
+            <div class="section" id="founder-risk">
+                <h3 class="section-title">Founder Risk</h3>
+                <p>Imagine trying to predict which way a cat will jump while it's still thinking about it, and the cat is also having an existential crisis about whether jumping even matters anymore. This is founder risk: the risk that the founding team might implode, pivot into oblivion, or simply lack the adaptability to navigate the chaos of early-stage company building.</p>
+                <p>It's often less about technical capability and more about that ineffable quality of being able to dance on hot coals while juggling flaming swords and singing "Like a Prayer" backwards, all while your investors watch and take notes on your form.</p>
+
+                <div class="subsection-title">The "I'm Not Your Employee" Tango</div>
+                <p>One founder, usually the CEO type who's watched one too many Steve Jobs documentaries and thinks wearing the same hoodie every day makes them a visionary, starts treating their co-founder like they're an entry-level code monkey. Suddenly, every conversation feels like a performance review, and passive-aggressive Slack messages would make Shakespeare sweat with their subtle brutality.</p>
+
+                <div class="subsection-title">The Great Equity Regret Spiral</div>
+                <p>The sweet agony of realizing you split the equity 50/50 because you were both high on startup dreams and matching friendship bracelets! Three months in, one founder is pulling 20-hour days while the other is "building relationships" by attending every startup mixer in a 50-mile radius and posting LinkedIn updates about "the grind" with more hashtags than actual content.</p>
+
+                <div class="subsection-title">The Vision Schism</div>
+                <p>Remember that perfect alignment you had about changing the world through blockchain-enabled sustainable coffee sourcing for introverted dolphins? Well, surprise! One founder now thinks you should pivot to AI-powered meditation apps for pest control, while the other is still committed to the original vision like it's their firstborn child.</p>
+
+                <div class="subsection-title">The Money Honey Meltdown</div>
+                <p>One founder wants to bootstrap until the heat death of the universe, eating nothing but expired ramen and coding by candlelight. The other is ready to raise a Series A before the MVP has even MVP'd, dreaming of office ping pong tables and kombucha on tap. The phrase "burn rate" gets thrown around like a weapon.</p>
+            </div>
+        </article>
+
+        <article id="graduating" class="chapter fade-in">
+            <div class="chapter-number">Conclusion</div>
+            <h2 class="chapter-title">Graduating to Seed Stage</h2>
+            <p>Oh, sweet Buddha riding a skateboard through a farmer's market, there's a glorious next level in this video game of venture-backed startups: the "seed round." To claw your way into this dimension, you must master execution risk.</p>
+            <p>Imagine yourself blindfolded, juggling flaming chainsaws while riding a unicycle across a tightrope made of your own expectations, suspended over a pit of your parents' disappointment. Below you, a panel of VCs score your performance like Olympic judges who've replaced their morning coffee with pure, uncut ambition.</p>
+            <p>You're expected to fundraise and build at the same time, which requires the focus of a Tibetan monk who's also somehow running a TikTok account, and the risk appetite of a guy who invests his life savings in a cryptocurrency named after a vegetable. Forget what your probability professor told you; here, in this game, the odds are against you like gravity is against a penguin with dreams of flight.</p>
+
+            <div class="section">
+                <h3 class="section-title">The Metamorphosis</h3>
+                <p>Transitioning from pre-seed to seed stage is NOT about how good you are at getting seed money; that talks more about your poetry skills and your ability to make VCs feel feelings. It is about your metamorphosis from PowerPoint slides to a tangible solution or MVP, where you can validate that people really want a solution for the problem you are solving.</p>
+                <p>And here's the kicker: you're doing this while simultaneously building the solution and burning cash, which is like being in a reality show where the prize is more borrowed time and the challenge is to not have a nervous breakdown on camera.</p>
+            </div>
+
+            <div class="callout">
+                "Execute. Validate. Iterate. Repeat. This is your mantra now; tattoo it somewhere uncomfortable as a reminder."
+            </div>
+
+            <p>Remember, amigo: you started this dream and you should be chasing it like an overenthusiastic golden retriever at a dog park who has just discovered that everything is a potential friend; sniffing opportunities, chasing leads, running in circles that somehow move forward, until someone decides to play catch with you and your vision becomes reality.</p>
+        </article>
+
+        <footer class="fade-in">
+            <div class="footer-title">Part One: Complete.</div>
+            <div class="footer-dots">
+                <div class="footer-dot"></div>
+                <div class="footer-dot"></div>
+                <div class="footer-dot"></div>
+            </div>
+            <p class="footer-text">You walked into this book a dreamer. You're walking out a dreamer with scars, spreadsheets, and a healthy distrust of anyone who uses the word "synergy" unironically.</p>
+            <p class="footer-text">The game doesn't get easier. You just get weirder.</p>
+            <p class="footer-text">And that, my friend, is exactly the point.</p>
+            <p class="footer-cta">Now go raise some hell. And some capital.<br>Preferably in that order.</p>
+        </footer>
+    </main>
+
+    <script>
+        // Create dot grid
+        function createDots() {
+            const grid = document.getElementById('dotGrid');
+            const spacing = 60;
+            const cols = Math.ceil(window.innerWidth / spacing);
+            const rows = Math.ceil(window.innerHeight / spacing);
+
+            for (let i = 0; i < cols * rows; i++) {
+                const dot = document.createElement('div');
+                dot.className = 'dot';
+                dot.style.left = (i % cols) * spacing + 'px';
+                dot.style.top = Math.floor(i / cols) * spacing + 'px';
+                dot.style.animationDelay = Math.random() * 3 + 's';
+                grid.appendChild(dot);
+            }
+        }
+
+        // Loading screen
+        window.addEventListener('load', () => {
+            createDots();
+            setTimeout(() => {
+                document.getElementById('loader').classList.add('hidden');
+            }, 800);
+        });
+
+        // Mobile nav toggle
+        function toggleNav() {
+            document.getElementById('nav').classList.toggle('visible');
+        }
+
+        // Scroll animations
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+        // Active nav link
+        const sections = document.querySelectorAll('article[id], section[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (scrollY >= sectionTop - 300) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + current) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Close nav on mobile when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (window.innerWidth <= 1000) {
+                    document.getElementById('nav').classList.remove('visible');
+                }
+            });
+        });
+
+        // Parallax dots on scroll
+        window.addEventListener('scroll', () => {
+            const scrolled = window.scrollY;
+            document.getElementById('dotGrid').style.transform = `translateY(${scrolled * 0.1}px)`;
+        });
+
+        // Theme toggle
+        function toggleTheme() {
+            const html = document.documentElement;
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateToggleLabel(newTheme);
+        }
+
+        function updateToggleLabel(theme) {
+            const label = document.querySelector('.toggle-label');
+            label.textContent = theme === 'light' ? 'Dark Mode' : 'Light Mode';
+        }
+
+        // Load saved theme
+        (function() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateToggleLabel(savedTheme);
+        })();
+    </script>
+</body>
+</html>

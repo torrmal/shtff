@@ -25,6 +25,7 @@ all: $(OUTDIR)/$(MAIN).pdf
 # Build and copy to root as book.pdf
 book: $(OUTDIR)/$(MAIN).pdf
 	cp $(OUTDIR)/$(MAIN).pdf $(BOOK)
+	cp $(BOOK) docs/$(BOOK)
 
 # Create output directory
 $(OUTDIR):
