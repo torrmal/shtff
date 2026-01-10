@@ -1,12 +1,13 @@
-# SH*T
+<img width="691" height="350" alt="image" src="https://github.com/user-attachments/assets/646a2b0d-9100-4552-a01e-da0bf98164c2" />
 
-**For Early-stage Founders Looking For Funding**
+
+
 
 A book for people who Googled "how to raise money" at 3 AM and ended up here instead of therapy.
 
 This is a draft of my learnings of the pre-seed stage funding at [mindsdb](https://github.com/mindsdb/mindsdb)
 
-**[Download the PDF](book.pdf)**
+**[Download the book's PDF](book.pdf)**
 
 ---
 
@@ -40,9 +41,13 @@ Founders. Dreamers. People whose therapists have therapists.
 
 Anyone who's ever looked at their bank account, then at their burn rate, and whispered: *"Math is just, like, a vibe."*
 
-## Who Should NOT Read This?
+## Contribute
 
-People who use "synergy" unironically. Leave. Now. This book can smell you.
+Hell yeah! just make PRs I will review them, or if you have more of a clue on writing than I do, I can make you a reviewer.
+
+## Thanks
+
+Special thanks to my early-stage investors and friends: Chon, Shankar, Patrik, Chetan, and Navin. To my family, for always being there. To the team at MindsDB, and to all the friends who patiently listened to my nonstop rambling about fundraising being “a thing with rules.” A special thank you to Luis Silva for encouraging me to turn my notes into a PDF—and for enduring the pain of actually reading them. And finally, to my co-founder Adam, for joining me on the crazy ride of building a company together.
 
 ## License
 
