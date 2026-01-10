@@ -41,9 +41,6 @@ Founders. Dreamers. People whose therapists have therapists.
 
 Anyone who's ever looked at their bank account, then at their burn rate, and whispered: *"Math is just, like, a vibe."*
 
-## Who Should NOT Read This?
-
-People who use "synergy" unironically. Leave. Now. This book can smell you.
 
 ## License
 
