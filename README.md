@@ -1,6 +1,7 @@
-# SH*T
+<img width="691" height="350" alt="image" src="https://github.com/user-attachments/assets/646a2b0d-9100-4552-a01e-da0bf98164c2" />
 
-**For Early-stage Founders Looking For Funding**
+
+
 
 A book for people who Googled "how to raise money" at 3 AM and ended up here instead of therapy.
 
