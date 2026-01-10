@@ -1,214 +1,55 @@
+# SH*T
 
-# WHAT THE FAQ - For pre-seed founders
+**For Early-stage Founders Looking For Funding**
 
-A LaTeX book project with a complete setup for document compilation and management.
+A book for people who Googled "how to raise money" at 3 AM and ended up here instead of therapy.
 
-## Files
+This is a draft of my learnings of the pre-seed stage funding at [mindsdb](https://github.com/mindsdb/mindsdb)
 
-- `main.tex` - Main LaTeX document
-- `chapters/` - Directory containing individual chapter files
-  - `introduction.tex` - Introduction chapter
-- `Makefile` - Build automation
-- `.gitignore` - Git ignore file for LaTeX auxiliary files
-- `README.md` - This file
+**[Download the PDF](book.pdf)**
 
-## Prerequisites
+---
 
-Make sure you have a LaTeX distribution installed:
+## What Is This?
 
-- **macOS**: Install BasicTeX using Homebrew: `brew install --cask basictex`
-- **Linux**: Install TeX Live: `sudo apt-get install texlive-full` (Ubuntu/Debian)
-- **Windows**: Install MiKTeX or TeX Live
+A survival guide disguised as a founders tutorial to fundraising.
 
-## Environment Setup
+If you've ever:
+- Explained your startup to your mom and watched her soul leave her body
+- Split equity 50/50 because "the vibes felt right"
+- Called a pivot a "strategic evolution" with a straight face
+- Mass emailed VCs like you were launching a desperate OnlyFans for term sheets
 
-### macOS (BasicTeX)
+Welcome home.
 
-After installing BasicTeX, you need to add the LaTeX executables to your PATH:
+## Build the Book
 
 ```bash
-# Add to your shell profile (~/.zshrc, ~/.bash_profile, or ~/.bashrc)
-export PATH="/usr/local/texlive/2025basic/bin/universal-darwin:$PATH"
-
-# Reload your shell configuration
-source ~/.zshrc  # or ~/.bash_profile
+make book
 ```
 
-**Alternative method (recommended):**
-```bash
-# Run this command after BasicTeX installation
-eval "$(/usr/libexec/path_helper)"
-```
+That's it. Your PDF appears like a VC at a YC lunch: `book.pdf`
 
-### Linux
+## Requirements
 
-```bash
-# Add to your shell profile (~/.bashrc or ~/.zshrc)
-export PATH="/usr/local/texlive/2025/bin/x86_64-linux:$PATH"
+LaTeX. Install it however you install things. You're a founder; you'll figure it out or mass blame it on your co-founder.
 
-# Reload your shell configuration
-source ~/.bashrc
-```
+## Who Should Read This?
 
-### Windows
+Founders. Dreamers. People whose therapists have therapists.
 
-Add the TeX Live bin directory to your system PATH:
-- TeX Live: `C:\texlive\2025\bin\windows`
-- MiKTeX: `C:\Program Files\MiKTeX\miktex\bin\x64`
+Anyone who's ever looked at their bank account, then at their burn rate, and whispered: *"Math is just, like, a vibe."*
 
-## Verify Installation
+## Who Should NOT Read This?
 
-Check that LaTeX executables are available:
+People who use "synergy" unironically. Leave. Now. This book can smell you.
 
-```bash
-# Check if pdflatex is accessible
-which pdflatex
+## License
 
-# Check version
-pdflatex --version
+GPL-3.0 with attribution required.
 
-# Check if other tools are available
-which bibtex
-which make
-```
+Any modification or publication must credit **Jorge Torres**, because his ego runs on recognition and instant ramen, and both are non-negotiable.
 
-## Building the Book
+---
 
-### Quick Start
-
-1. **Set up environment** (if not already done):
-   ```bash
-   # macOS - run this once after BasicTeX installation
-   eval "$(/usr/libexec/path_helper)"
-   ```
-
-2. **Clone or download** this project to your local machine
-
-3. **Navigate to the project directory**:
-   ```bash
-   cd /path/to/your/book
-   ```
-
-4. **Compile the document**:
-   ```bash
-   make
-   ```
-
-5. **View the PDF**:
-   ```bash
-   make view
-   ```
-
-### Available Commands
-
-- `make` or `make all` - Compile the document (full compilation with bibliography)
-- `make quick` - Quick compile (single pass, no bibliography) 
-- `make view` - Open the PDF in your default viewer
-- `make clean` - Remove all generated files (including the `out/` directory)
-- `make distclean` - Same as clean (removes all generated files)
-- `make help` - Show available commands
-
-**Note:** All generated files (PDF, log files, auxiliary files) are stored in the `out/` directory to keep your project directory clean.
-
-### Manual Compilation
-
-If you prefer to compile manually or troubleshoot issues:
-
-```bash
-# Navigate to the output directory
-cd out
-
-# Run pdflatex (first pass)
-pdflatex ../main.tex
-
-# Run bibtex (if you have bibliography)
-bibtex main
-
-# Run pdflatex again (second pass)
-pdflatex ../main.tex
-
-# Run pdflatex final time (third pass for cross-references)
-pdflatex ../main.tex
-```
-
-### Troubleshooting Build Issues
-
-**If you get "command not found" errors:**
-
-1. **Check PATH setup**:
-   ```bash
-   echo $PATH | grep texlive
-   ```
-
-2. **Verify LaTeX installation**:
-   ```bash
-   which pdflatex
-   ls -la /usr/local/texlive/2025basic/bin/universal-darwin/
-   ```
-
-3. **Re-run path helper** (macOS):
-   ```bash
-   eval "$(/usr/libexec/path_helper)"
-   ```
-
-**If compilation fails:**
-
-1. **Check the log file**:
-   ```bash
-   cat out/main.log | tail -20
-   ```
-
-2. **Clean and rebuild**:
-   ```bash
-   make clean
-   make
-   ```
-
-3. **Install missing packages** (if needed):
-   ```bash
-   sudo tlmgr install <package-name>
-   ```
-
-## Document Structure
-
-This book uses a modular structure for better organization:
-
-### Main Files
-- `main.tex` - Main document file with:
-  - Document class and package imports
-  - Page layout and styling
-  - Title page setup
-  - Table of contents
-  - Chapter inclusions
-
-### Chapter Files
-- `chapters/introduction.tex` - Introduction chapter
-- Additional chapter files can be added to the `chapters/` directory
-
-### Build Output
-- `out/` - Directory containing all generated files:
-  - `main.pdf` - Final compiled book
-  - `main.log` - Compilation log
-  - `main.aux`, `main.toc`, etc. - LaTeX auxiliary files
-
-## Customization
-
-1. **Change the document class**: Modify the `\documentclass` line in `main.tex`
-2. **Add packages**: Include additional packages in the preamble
-3. **Modify styling**: Adjust the page geometry, fonts, and colors
-4. **Add bibliography**: Create a `references.bib` file for citations
-
-## Tips
-
-- Use `make quick` for faster compilation during development
-- Use `make clean` to remove auxiliary files before committing to version control
-- The `.gitignore` file is configured to ignore LaTeX auxiliary files and the `out/` directory
-- **Adding new chapters**: Create new `.tex` files in the `chapters/` directory and include them in `main.tex` using `\input{../chapters/filename}`
-- **Font**: This book uses Source Serif Pro for professional typography
-- **Styling**: The document uses a clean black and white design perfect for printing
-
-## Troubleshooting
-
-- If compilation fails, check the `.log` file for error messages
-- Make sure all required packages are installed
-- For bibliography issues, ensure `references.bib` exists and contains valid entries
+*Now stop reading READMEs and go build something that'll make your future biographer uncomfortable.*
