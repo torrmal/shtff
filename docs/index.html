@@ -53,15 +53,8 @@
             border-color: #ddd;
         }
 
-        [data-theme="light"] .menu-toggle {
-            background: var(--bg);
-            border-color: var(--border);
-            color: var(--fg);
-        }
-
-        [data-theme="light"] .menu-toggle:hover {
+        [data-theme="light"] .menu-toggle span {
             background: var(--fg);
-            color: var(--bg);
         }
 
         /* GitHub link */
@@ -373,28 +366,58 @@
             font-size: 1rem;
         }
 
-        /* Mobile menu toggle */
+        /* Mobile menu toggle - hamburger */
         .menu-toggle {
             display: none;
             position: fixed;
             top: 1.5rem;
             left: 1.5rem;
             z-index: 200;
-            background: var(--bg);
-            border: 1px solid var(--border);
-            color: var(--fg);
-            padding: 0.75rem 1.25rem;
-            font-family: "Doto", sans-serif;
-            font-size: 0.7rem;
-            font-weight: 700;
-            letter-spacing: 2px;
+            background: transparent;
+            border: none;
+            width: 30px;
+            height: 24px;
             cursor: pointer;
-            transition: all 0.3s ease;
+            padding: 0;
         }
 
-        .menu-toggle:hover {
+        .menu-toggle span {
+            display: block;
+            position: absolute;
+            width: 100%;
+            height: 2px;
             background: var(--fg);
-            color: var(--bg);
+            border-radius: 2px;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .menu-toggle span:nth-child(1) {
+            top: 0;
+        }
+
+        .menu-toggle span:nth-child(2) {
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .menu-toggle span:nth-child(3) {
+            bottom: 0;
+        }
+
+        /* Hamburger to X animation */
+        .menu-toggle.active span:nth-child(1) {
+            top: 50%;
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+            transform: translateX(-10px);
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            bottom: 50%;
+            transform: translateY(50%) rotate(-45deg);
         }
 
         /* Main content */
@@ -833,6 +856,7 @@
         @media (max-width: 1000px) {
             nav {
                 transform: translateX(-100%);
+                padding-top: 60px;
             }
 
             nav.visible {
@@ -841,6 +865,10 @@
 
             .menu-toggle {
                 display: block;
+            }
+
+            .nav-logo {
+                display: none;
             }
 
             main {
@@ -924,7 +952,11 @@
 
     <div class="dot-grid" id="dotGrid"></div>
 
-    <button class="menu-toggle" onclick="toggleNav()">MENU</button>
+    <button class="menu-toggle" id="menuToggle" onclick="toggleNav()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </button>
 
     <a href="https://github.com/torrmal/shitff" target="_blank" class="github-link">
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"></path></svg>
@@ -1545,6 +1577,7 @@
         // Mobile nav toggle
         function toggleNav() {
             document.getElementById('nav').classList.toggle('visible');
+            document.getElementById('menuToggle').classList.toggle('active');
         }
 
         // Check if element is in viewport (used for nav click handling)
@@ -1601,6 +1634,7 @@
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 1000) {
                     document.getElementById('nav').classList.remove('visible');
+                    document.getElementById('menuToggle').classList.remove('active');
                 }
                 // After navigation, trigger typing effect for visible titles
                 setTimeout(() => {
