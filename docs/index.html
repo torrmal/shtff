@@ -490,6 +490,18 @@
             animation: heroReveal 1s cubic-bezier(0.4, 0, 0.2, 1) 0.3s forwards;
         }
 
+        .hero-part {
+            font-family: "Doto", sans-serif;
+            font-weight: 900;
+            font-size: 0.75rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--gray);
+            margin-top: 1.5rem;
+            opacity: 0;
+            animation: heroReveal 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s forwards;
+        }
+
         .hero-author {
             font-family: "Doto", sans-serif;
             font-size: 0.7rem;
@@ -560,6 +572,7 @@
             max-width: 850px;
             margin: 0 auto;
             position: relative;
+            scroll-margin-top: 2rem;
         }
 
         .chapter::before {
@@ -600,6 +613,41 @@
             letter-spacing: -2px;
             line-height: 1.05;
             margin-bottom: 2.5rem;
+            position: relative;
+        }
+
+        .chapter-title.typing {
+            color: transparent;
+        }
+
+        .chapter-title.typing::before {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            color: var(--fg);
+            overflow: hidden;
+            white-space: nowrap;
+            border-right: 3px solid var(--fg);
+            animation: typing-reveal 1.5s steps(40, end) forwards, blink-caret 0.75s step-end 4;
+        }
+
+        .chapter-title.typing.done {
+            color: var(--fg);
+        }
+
+        .chapter-title.typing.done::before {
+            display: none;
+        }
+
+        @keyframes typing-reveal {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--fg); }
         }
 
         .chapter p {
@@ -818,19 +866,8 @@
             }
         }
 
-        /* Scroll animations */
+        /* Scroll animations - disabled for reliability */
         .fade-in {
-            opacity: 1;
-            transform: translateY(0);
-            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .fade-in.animate {
-            opacity: 0;
-            transform: translateY(30px);
-        }
-
-        .fade-in.animate.visible {
             opacity: 1;
             transform: translateY(0);
         }
@@ -931,7 +968,8 @@
             </div>
             <div class="hero-content">
                 <h1 class="hero-title">SH*T</h1>
-                <p class="hero-subtitle">For Early-stage Founders Looking For Funding<br><strong>PART 1: Pre-Seed Stage</strong></p>
+                <p class="hero-subtitle">For Early-stage Founders Looking For Funding</p>
+                <p class="hero-part">PART 1: Pre-Seed Stage</p>
                 <p class="hero-tagline" style="font-style: italic; color: var(--gray); max-width: 500px; margin-top: 1.5rem; font-size: 0.95rem;">A spiritual guide through Silicon Valley's acid trip, written by a fellow founder who's been kicked in the teeth by reality so many times, they're now best friends who meet Thursdays for questionable life choices.</p>
                 <p class="hero-author">By JT</p>
             </div>
@@ -1509,33 +1547,33 @@
             document.getElementById('nav').classList.toggle('visible');
         }
 
-        // Scroll animations - progressive enhancement
-        const fadeElements = document.querySelectorAll('.fade-in');
-
-        // Check if element is in viewport
+        // Check if element is in viewport (used for nav click handling)
         function isInViewport(el) {
             const rect = el.getBoundingClientRect();
             return rect.top < window.innerHeight && rect.bottom > 0;
         }
 
-        // Add animate class and check initial visibility
-        fadeElements.forEach(el => {
-            el.classList.add('animate');
-            // Immediately show elements already in viewport
-            if (isInViewport(el)) {
-                el.classList.add('visible');
-            }
+        // Typing effect for chapter titles
+        const chapterTitles = document.querySelectorAll('.chapter-title');
+
+        // Set data-text attribute for the typing effect
+        chapterTitles.forEach(title => {
+            title.setAttribute('data-text', title.textContent);
         });
 
-        const observer = new IntersectionObserver((entries) => {
+        const titleObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
+                if (entry.isIntersecting && !entry.target.classList.contains('typed')) {
+                    entry.target.classList.add('typed', 'typing');
+                    // Remove caret after animation completes
+                    setTimeout(() => {
+                        entry.target.classList.add('done');
+                    }, 2000);
                 }
             });
-        }, { threshold: 0.05, rootMargin: '100px' });
+        }, { threshold: 0.3, rootMargin: '0px' });
 
-        fadeElements.forEach(el => observer.observe(el));
+        chapterTitles.forEach(title => titleObserver.observe(title));
 
         // Active nav link
         const sections = document.querySelectorAll('article[id], section[id]');
@@ -1558,12 +1596,21 @@
             });
         });
 
-        // Close nav on mobile when clicking a link
+        // Close nav on mobile when clicking a link + trigger typing effect
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 if (window.innerWidth <= 1000) {
                     document.getElementById('nav').classList.remove('visible');
                 }
+                // After navigation, trigger typing effect for visible titles
+                setTimeout(() => {
+                    chapterTitles.forEach(title => {
+                        if (isInViewport(title) && !title.classList.contains('typed')) {
+                            title.classList.add('typed', 'typing');
+                            setTimeout(() => title.classList.add('done'), 2000);
+                        }
+                    });
+                }, 100);
             });
         });
 
