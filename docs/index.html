@@ -1350,7 +1350,7 @@
             <p>There is something I've witnessed so many times it's started to feel like one of those immutable truths; like the way cats always land on their feet, or how your code only works perfectly right before the demo crashes. In the pre-seed stage, there are really only two fundamental risks that matter: market risk and founder risk. They dance together like drunk philosophers at a Silicon Valley meditation retreat. You must learn to master those risks if you ever want to get past the starting line of your startup, and yes, this is also a critical requirement for any funding in your plans. These are basically the two only reasons why everyone (but you) knows you can certainly die. Once again: if you are not aware of these risks, you are most likely to be the next startup that no one will ever hear about.</p>
 
             <div class="section">
-                <h3 class="section-title">Our First Exposure to Risk Awareness</h3>
+                <div class="subsection-title">Our First Exposure to Risk Awareness</div>
                 <p>As a proxy for explaining market and founder risks in this chapter, let me tell you about my first contact with an investor ever, and illustrate how simple the thought process for investors really is. This was only a few days into my previous startup (the one that failed, rest its soul); our dear friend Rob, who joined us as a co-founder, storms into the room like he'd just seen Elvis riding an alpaca through the parking lot. "You guys know who Mark Cuban is?" he gasped, practically vibrating with excitement.</p>
                 <p>We were so clueless about anything startups that, frankly, I looked at him confused, mentally flipping through my limited sports Rolodex like a drunk trying to find their house key in a bowl of spaghetti.</p>
                 <p>"He's the guy from Shark Tank," Rob explained, probably questioning all his life choices that led to this moment. "Mark saw our startup and has three questions: 'Hi guys! Tell me about the market, what's your plan to get that market, and why are you doing this?'"</p>
@@ -1422,7 +1422,7 @@
             </div>
 
             <div class="section">
-                <h3 class="section-title">The Cosmic Dance</h3>
+                <div class="subsection-title">The Cosmic Dance</div>
                 <p>Here's where it gets interesting: these two risks are like conjoined twins who took different life paths, with one becoming more dominant than the other depending on the weather and your karma. In my opinion, you should address the essentials of founder risk first, so you can focus on market risk while keeping founder risk under control. As such, everything about founder risk should be handled efficiently. On the one hand, if you spend too much time perfecting your team dynamics through ayahuasca ceremonies, the market might move on without you. On the other hand, everything about market risk is an ongoing discovery process; perhaps only until you start building product and pitching do you start seeing market gaps you didn't want to see before.</p>
                 <p>Here's your pre-seed vibe check: if every meeting is a rerun of "So, Who's the CEO?" or "Are you sure you're not just dressed up as a startup on Halloween?"; congrats, you're still radiating founder risk like a Chernobyl reactor at a house party. But if the questions suddenly mutate into "Show me your month-over-month growth, your CAC, your LTV, your secret handshake with the market gods," and you're sweating because you have more metrics in your spreadsheet than dollars in your bank account, that's not a bad thing; it means you've finally convinced people you're a real team and now they want to know if this market even makes sense at all. This also means your market story probably still sucks, so you need to work on that.</p>
                 <p>As you build some pitching scar tissue, you will also learn that different investors will weigh these risks differently based on their own trauma (I mean, experiences). But you, you need to believe you've got those two risks covered; when you really believe that, not the shallow belief of a startup founder practicing their pitch in front of a mirror while making awkward eye contact with themselves, but the deep cosmic certainty that comes from staring into the void until the void starts taking notes and asking follow-up questions; everything in your pre-seed days will start to happen. The investors will materialize before you like Buddha-nature revealing itself to an enlightened monk, or at least like people returning your emails.</p>
@@ -1982,7 +1982,13 @@
                     const link = document.createElement('a');
                     link.href = `#${id}`;
                     link.className = 'right-nav-link';
-                    link.textContent = section.textContent;
+                    const text = section.textContent;
+                    if (text.includes(':')) {
+                        const colonIndex = text.indexOf(':');
+                        link.innerHTML = `<strong>${text.substring(0, colonIndex + 1)}</strong>${text.substring(colonIndex + 1)}`;
+                    } else {
+                        link.textContent = text;
+                    }
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
                         section.scrollIntoView({ behavior: 'smooth', block: 'start' });
@@ -2049,7 +2055,13 @@
                     const link = document.createElement('a');
                     link.href = `#${id}`;
                     link.className = 'nav-sub-link';
-                    link.textContent = section.textContent;
+                    const text = section.textContent;
+                    if (text.includes(':')) {
+                        const colonIndex = text.indexOf(':');
+                        link.innerHTML = `<strong>${text.substring(0, colonIndex + 1)}</strong>${text.substring(colonIndex + 1)}`;
+                    } else {
+                        link.textContent = text;
+                    }
                     link.addEventListener('click', (e) => {
                         e.preventDefault();
                         document.getElementById('nav').classList.remove('visible');
