@@ -1,8 +1,7 @@
 \documentclass[11pt,twoside,openright]{book}
 
 % Packages
-\usepackage[utf8]{inputenc}
-\usepackage[T1]{fontenc}
+\usepackage{fontspec}
 \usepackage{amsmath}
 \usepackage{amsfonts}
 \usepackage{amssymb}
@@ -13,8 +12,11 @@
 \usepackage{xcolor}
 \usepackage{titlesec}
 \usepackage{fancyhdr}
-\usepackage[default]{sourceserifpro}
 \usepackage{microtype}
+
+% Font setup
+\setmainfont{Times New Roman}
+\newfontfamily\dotofont{Doto-Variable.ttf}[Path=fonts/, UprightFont=*]
 \usepackage{tocloft}
 \usepackage{enumitem}
 \usepackage{setspace}
@@ -82,21 +84,23 @@
 \renewcommand{\footrulewidth}{0pt}
 \renewcommand{\headrule}{\hbox to\headwidth{\leaders\hrule height \headrulewidth\hfill}}
 
-% Beautiful chapter and section styling
+% Beautiful chapter and section styling with Doto font
+% Format chapter number with leading zero like website (Chapter 01, Chapter 02, etc.)
+\newcommand{\chapternum}{\ifnum\value{chapter}<10 0\fi\thechapter}
 \titleformat{\chapter}[display]
-{\normalfont\huge\bfseries}
-{\chaptertitlename\ \thechapter}{20pt}{\Huge}
+{\dotofont\bfseries}
+{\small\MakeUppercase{\chaptertitlename}\ \chapternum}{10pt}{\LARGE}
 
 \titleformat{\section}
-{\normalfont\Large\bfseries}
+{\dotofont\Large\bfseries}
 {\thesection}{1em}{}
 
 \titleformat{\subsection}
-{\normalfont\large\bfseries}
+{\dotofont\large\bfseries}
 {\thesubsection}{1em}{}
 
 \titleformat{\subsubsection}
-{\normalfont\normalsize\bfseries}
+{\dotofont\normalsize\bfseries}
 {\thesubsubsection}{1em}{}
 
 % Enhanced spacing for sections
@@ -155,17 +159,17 @@ the teeth by reality so many times, they're now best friends who meet Thursdays 
 
 
 % Include the introduction chapter
-\input{../chapters/introduction}
+\input{chapters/introduction}
 
-\input{../chapters/preseed_rules}
+\input{chapters/preseed_rules}
 
-\input{../chapters/preseed_risks}
+\input{chapters/preseed_risks}
 
-\input{../chapters/preseed_glossary}
+\input{chapters/preseed_glossary}
 
-\input{../chapters/preseed_tutorial}
+\input{chapters/preseed_tutorial}
 
-\input{../chapters/seed_risks}
+\input{chapters/seed_risks}
 
 
 \end{document}

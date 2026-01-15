@@ -7,8 +7,8 @@ MAIN = main
 # Output directory
 OUTDIR = out
 
-# LaTeX compiler
-LATEX = pdflatex
+# LaTeX compiler (xelatex for custom fonts)
+LATEX = xelatex
 
 # BibTeX compiler
 BIBTEX = bibtex
@@ -33,14 +33,13 @@ $(OUTDIR):
 
 # Compile the document
 $(OUTDIR)/$(MAIN).pdf: $(MAIN).tex | $(OUTDIR)
-	cd $(OUTDIR) && $(LATEX) -interaction=nonstopmode ../$(MAIN).tex
-	cd $(OUTDIR) && $(BIBTEX) $(MAIN) || true
-	cd $(OUTDIR) && $(LATEX) -interaction=nonstopmode ../$(MAIN).tex
-	cd $(OUTDIR) && $(LATEX) -interaction=nonstopmode ../$(MAIN).tex
+	$(LATEX) -interaction=nonstopmode -output-directory=$(OUTDIR) $(MAIN).tex || true
+	$(LATEX) -interaction=nonstopmode -output-directory=$(OUTDIR) $(MAIN).tex || true
+	$(LATEX) -interaction=nonstopmode -output-directory=$(OUTDIR) $(MAIN).tex || true
 
 # Quick compile (single pass, no bibliography)
 quick: $(MAIN).tex | $(OUTDIR)
-	cd $(OUTDIR) && $(LATEX) -interaction=nonstopmode ../$(MAIN).tex
+	$(LATEX) -interaction=nonstopmode -output-directory=$(OUTDIR) $(MAIN).tex
 
 # View the PDF
 view: $(OUTDIR)/$(MAIN).pdf
@@ -48,10 +47,9 @@ view: $(OUTDIR)/$(MAIN).pdf
 
 # Clean and compile in one command
 fresh: clean | $(OUTDIR)
-	cd $(OUTDIR) && $(LATEX) -interaction=nonstopmode ../$(MAIN).tex || true
-	cd $(OUTDIR) && $(BIBTEX) $(MAIN) || true
-	cd $(OUTDIR) && $(LATEX) -interaction=nonstopmode ../$(MAIN).tex || true
-	cd $(OUTDIR) && $(LATEX) -interaction=nonstopmode ../$(MAIN).tex || true
+	$(LATEX) -interaction=nonstopmode -output-directory=$(OUTDIR) $(MAIN).tex || true
+	$(LATEX) -interaction=nonstopmode -output-directory=$(OUTDIR) $(MAIN).tex || true
+	$(LATEX) -interaction=nonstopmode -output-directory=$(OUTDIR) $(MAIN).tex || true
 
 # Clean auxiliary files
 clean:
